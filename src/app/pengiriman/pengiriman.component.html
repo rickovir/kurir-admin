@@ -1,0 +1,46 @@
+<div class="alert alert-primary" role="alert">
+ 
+  <nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand"> <h5>Pengiriman</h5></a>
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+</nav>
+
+</div>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Id pengiriman</th>
+      <th scope="col">Id kurir</th>
+      <th scope="col">Id paket</th>
+      <th scope="col">Kategori paket</th>
+       <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pengiriman of pengirimanData">
+      <th scope="row">{{pengiriman.id_pengiriman}}</th>
+      <td>{{pengiriman.id_kurir}}</td>
+      <td>{{pengiriman.id_paket}}</td>
+      <td>{{pengiriman.kategori}}</td>
+      <td>{{pengiriman.status}}</td>
+      <td>
+      	<div class="custom-control custom-checkbox" (click)="restorePengiriman(pengiriman.id_pengiriman)" *ngIf="pengiriman.trash == 'Y'">
+		  <input type="checkbox" class="custom-control-input" id="trash-check{{pengiriman.id_pengiriman}}" checked>
+		  <label class="custom-control-label" for="trash-check{{pengiriman.id_pengiriman}}">Y</label>
+		</div>
+      	<div class="custom-control custom-checkbox" (click)="deletePengiriman(pengiriman.id_pengiriman)" *ngIf="pengiriman.trash == 'N'">
+		  <input type="checkbox" class="custom-control-input" id="trash-check{{pengiriman.id_pengiriman}}">
+		  <label class="custom-control-label" for="trash-check{{pengiriman.id_pengiriman}}">Y</label>
+		</div>
+      </td>
+      <td>
+        <button class="btn btn-primary" [routerLink]="['/pengiriman', pengiriman.id_pengiriman]">Edit</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

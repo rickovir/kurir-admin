@@ -1,0 +1,79 @@
+<div class="alert alert-primary" role="alert">
+ 
+  <nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand"> <h5>Paket Barang</h5></a>
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+</nav>
+
+</div>
+
+
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Id paket</th>
+      <th scope="col">Nama pengirim</th>
+      <th scope="col">Tujuan</th>
+      <th scope="col">Nama penerima</th>
+      <th scope="col">Kategori paket</th>
+    </tr>
+  </thead>
+<tr>
+      <th scope="row">1</th>
+      <th >11212120992</th>
+      <th >Mia Kastina</th>
+      <th >Jakarta Barat</th>
+      <th >Vienie Meuthia Maharani</th>
+      <th >Reguler</th>
+    </tr>
+<tr>
+      <th scope="row">2</th>
+      <th >43424342421</th>
+      <th >Mia Kastina</th>
+      <th >Jakarta Barat</th>
+      <th >Vienie Meuthia Maharani</th>
+      <th >Reguler</th>
+    </tr>
+
+<tr>
+      <th scope="row">3</th>
+      <th >143432424234</th>
+      <th >Mia Kastina</th>
+      <th >Jakarta Barat</th>
+      <th >Vienie Meuthia Maharani</th>
+      <th >Reguler</th>
+    </tr>
+
+<button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+  Save
+</button>
+
+  <tbody>
+    <tr *ngFor="let acara of acaraData">
+      <th scope="row">{{acara.id_paket}}</th>
+      <td>{{acara.nama_pengirim}}</td>
+      <td>{{acara.tujuan}}</td>
+      <td>{{acara.nama_penerima}}</td>
+        <td>{{acara.nama_kategori}}</td>
+      <td>
+      	<div class="custom-control custom-checkbox" (click)="restoreAcara(acara.id_acara)" *ngIf="acara.trash == 'Y'">
+		  <input type="checkbox" class="custom-control-input" id="trash-check{{acara.id_acara}}" checked>
+		  <label class="custom-control-label" for="trash-check{{acara.id_acara}}">Y</label>
+		</div>
+      	<div class="custom-control custom-checkbox" (click)="deleteAcara(acara.id_acara)" *ngIf="acara.trash == 'N'">
+		  <input type="checkbox" class="custom-control-input" id="trash-check{{acara.id_acara}}">
+		  <label class="custom-control-label" for="trash-check{{acara.id_acara}}">Y</label>
+		</div>
+      </td>
+      <td>
+        <button class="btn btn-primary" [routerLink]="['/acara', acara.id_acara]">Edit</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
