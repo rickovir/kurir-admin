@@ -1,40 +1,41 @@
-<div class="alert alert-primary" role="alert">
- 
-  <nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand"> <h5>Kurir</h5></a>
-  <form class="form-inline">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-  </form>
-</nav>
-
-</div>
-
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">No</th>
-      <th scope="col">Id kurir</th>
-      <th scope="col">Nama kurir</th>
-      <th scope="col">No Hp</th>
-      <th scope="col">Alamat</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let kurir of kurirData">
-      <th scope="row">{{kurir.id_kurir}}</th>
-      <td>{{kurir.nama_kurir}}</td>
-      <td>{{kurir.nohp}}</td>
-      <td>{{kurir.alamat}}</td>
-      <td>
-      	<div class="custom-control custom-checkbox" (click)="restoreKurir(kurir.id_kurir)" *ngIf="kurir.trash == 'Y'">
-		  <input type="checkbox" class="custom-control-input" id="trash-check{{kurir.id_kurir}}" checked>
-		  <label class="custom-control-label" for="trash-check{{kurir.id_kurir}}">Y</label>
-		</div>
-      	<div class="custom-control custom-checkbox" (click)="deleteKurir(kurir.id_kurir)" *ngIf="kurir.trash == 'N'">
-		  <input type="checkbox" class="custom-control-input" id="trash-check{{kurir.id_kurir}}">
-		  <label class="custom-control-label" for="trash-check{{kurir.id_kurir}}">Y</label>
-		</div>
+<h4>Kurir</h4>
+<div class="card">
+  <div class="header">
+    <a href="paket/add" class="btn btn-success pull-right" >Add Kurir</a> 
+    <h4 class="title">Kurir</h4>
+    <p class="category">List Data Kurir</p>
+  </div>
+  <style type="text/css">
+  input[type="search"] {
+    border: 1px solid #66615b !important;
+  }
+</style>
+<div class="content table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">Id kurir</th>
+        <th scope="col">Nama kurir</th>
+        <th scope="col">No Hp</th>
+        <th scope="col">Alamat</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let kurir of kurirData">
+        <th scope="row">{{kurir.id_kurir}}</th>
+        <td>{{kurir.nama_kurir}}</td>
+        <td>{{kurir.nohp}}</td>
+        <td>{{kurir.alamat}}</td>
+        <td>
+         <div class="custom-control custom-checkbox" (click)="restoreKurir(kurir.id_kurir)" *ngIf="kurir.trash == 'Y'">
+          <input type="checkbox" class="custom-control-input" id="trash-check{{kurir.id_kurir}}" checked>
+          <label class="custom-control-label" for="trash-check{{kurir.id_kurir}}">Y</label>
+        </div>
+        <div class="custom-control custom-checkbox" (click)="deleteKurir(kurir.id_kurir)" *ngIf="kurir.trash == 'N'">
+          <input type="checkbox" class="custom-control-input" id="trash-check{{kurir.id_kurir}}">
+          <label class="custom-control-label" for="trash-check{{kurir.id_kurir}}">Y</label>
+        </div>
       </td>
       <td>
         <button class="btn btn-primary" [routerLink]="['/kurir', kurir.id_kurir]">Edit</button>
@@ -42,3 +43,6 @@
     </tr>
   </tbody>
 </table>
+
+</div>
+</div>
