@@ -33,6 +33,25 @@ export class ListPengirimanBesarComponent implements OnInit {
   			this.lists = data;
   			console.log(data);
   		});
+    this.listPengirimanBesarService.ListPengirimanBesarStream().subscribe(
+      (data:any)=>{
+        console.log(data);
+        if(data.type == "add")
+        {
+          data.data.IDListPengirimanBesar = data.IDListPengirimanBesar;
+          this.lists.unshift(data.data);
+        }
+        else if(data.type="batal")
+        {
+          for(let i =0; i<this.lists.length; i++)
+          {
+            if(this.lists[i].IDListPengirimanBesar == data.dataID.IDListPengirimanBesar)
+            {
+              this.lists[i].isCancel = 'Y';
+            }
+          }
+        }
+      });
   }
 
   initData()
@@ -50,9 +69,12 @@ export class ListPengirimanBesarComponent implements OnInit {
   	let tempKurir = this.kurirs.filter(data=>data.IDKurir == id);
   	return tempKurir[0].nama_kurir;
   }
-  doDeleteList(id)
+  doBatalList(id)
   {
-
+    var data = {IDListPengirimanBesar:id};
+    this.listPengirimanBesarService.batalList(data).subscribe(data=>{
+      console.log(data);
+    });
   }
 
 }

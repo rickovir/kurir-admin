@@ -14,7 +14,7 @@
         <th scope="col" width="23%">Tujuan</th>
         <th scope="col" width="24%">Kurir</th>
         <th scope="col" width="10%">Terkirim</th>
-        <th scope="col" width="15%">Action</th>
+        <th scope="col" width="15%">Cancle</th>
       </tr>
     </thead>
     <tbody>
@@ -27,9 +27,20 @@
         	<button *ngIf="list.isSend =='N' " class="btn btn-fill btn-danger"><i class="ti-na"></i></button>
         	<button  *ngIf="list.isSend =='Y' " class="btn btn-fill btn-success"><i class="ti-check"></i></button>
         </td>
-        <td>
-          <a href="list-pengiriman-besar/update/{{ list.IDListPengirimanBesar }}" class="btn btn-success btn-fill"><i class="ti-pencil"></i></a>
-          <button (click)="doDeleteList( list.IDListPengirimanBesar)" class="btn btn-danger btn-fill"><i class="ti-trash"></i></button>
+        <td><!-- 
+          <a href="list-pengiriman-besar/update/{{ list.IDListPengirimanBesar }}" class="btn btn-success btn-fill"><i class="ti-pencil"></i></a> -->
+          <button (click)="doBatalList(list.IDListPengirimanBesar)" *ngIf="list.isCancel == 'N'" class="btn btn-danger btn-fill">
+            <!-- <i class="ti-trash"></i> -->
+            Batalkan
+          </button>
+          <button *ngIf="list.isCancel == 'Y'" class="btn btn-warning btn-fill">
+            <!-- <i class="ti-trash"></i> -->
+            Dibatalkan
+          </button>
+          <button *ngIf="list.isSend == 'Y'" class="btn btn-success btn-fill">
+            <!-- <i class="ti-trash"></i> -->
+            Terkirim
+          </button>
         </td>
       </tr>
     </tbody>

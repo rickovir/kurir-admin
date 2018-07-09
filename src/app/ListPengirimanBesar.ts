@@ -4,6 +4,7 @@ export class ListPengirimanBesar{
 	IDKurir:number;
 	IDCabangAsal:number;
 	isSend:string;
+	isCancel:string;
 	created_on:number;
 
 	constructor(){
@@ -11,6 +12,7 @@ export class ListPengirimanBesar{
 		this.IDCabangAsal=0;	
 		this.IDCabangTujuan=0;
 		this.isSend = "N";
+		this.isCancel = "N";
 		this.created_on = 0;	
 	}
 }

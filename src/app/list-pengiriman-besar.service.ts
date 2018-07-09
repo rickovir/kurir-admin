@@ -130,4 +130,38 @@ export class ListPengirimanBesarService {
         })
       return observable;
   }
+  public batalList(data)
+  {
+    let send = {
+      type : 'batal',
+      data
+    };
+    console.log(send);
+    this.socket.emit('list_pengiriman_besar_stream', send);
+    
+      let observable:Observable<any> = new Observable(
+        (observer) => {
+        this.socket.on('list_pengiriman_besar_stream', 
+          (data) => {
+            observer.next(data);
+          });
+        })
+      return observable;
+  }
+  
+  public callSelectListBesar(id)
+  {
+    this.socket.emit("select_list_pengiriman_besar",{IDListPengirimanBesar:id});
+  }
+  public receiveSelectKurir()
+  {
+  let observable:Observable<any> = new Observable(
+      (observer) => {
+      this.socket.on('select_kurir_messages', 
+        (data) => {
+        observer.next(data);
+        });
+      })
+    return observable;
+  }
 }
