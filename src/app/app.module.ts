@@ -17,28 +17,45 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { PengirimanDetailComponent } from './pengiriman-detail/pengiriman-detail.component';
 import { KurirDetailComponent } from './kurir-detail/kurir-detail.component';
 import { AcaraDetailComponent } from './acara-detail/acara-detail.component';
+import { AddKurirComponent } from './add-kurir/add-kurir.component';
+import { UpdateKurirComponent } from './update-kurir/update-kurir.component';
+import { ListPengirimanBesarComponent } from './list-pengiriman-besar/list-pengiriman-besar.component';
+import { AddListPengirimanBesarComponent } from './add-list-pengiriman-besar/add-list-pengiriman-besar.component';
+import { UpdateListPengirimanBesarComponent } from './update-list-pengiriman-besar/update-list-pengiriman-besar.component';
 
 const adminRoute:Routes =[
  {
    path:'home',
    component:HomeComponent
  },
- {
-   path:'acara',
-   component:AcaraComponent
+  {
+   path:'kurir/add',
+   component:AddKurirComponent
  },
- {
-   path:'acara/:id',
-   component:AcaraDetailComponent
- },
-{
+  {
    path:'kurir',
    component:KurirComponent
+ },
+ {
+    path:"kurir/update/:id",
+    component:UpdateKurirComponent
  },
  {
    path:'kurir/:id',
    component:KurirDetailComponent
  },
+  {
+   path:'list-pengiriman-besar',
+   component:ListPengirimanBesarComponent
+ },
+ {
+    path:"list-pengiriman-besar/update/:id",
+    component:UpdateListPengirimanBesarComponent
+ },
+  {
+   path:'list-pengiriman-besar/add',
+   component:AddListPengirimanBesarComponent
+  },
  {
    path:'pengiriman',
    component:PengirimanComponent
@@ -74,7 +91,12 @@ const appRoute: Routes = [
     FooterComponent,
     PengirimanDetailComponent,
     KurirDetailComponent,
-    AcaraDetailComponent
+    AcaraDetailComponent,
+    AddKurirComponent,
+    UpdateKurirComponent,
+    ListPengirimanBesarComponent,
+    AddListPengirimanBesarComponent,
+    UpdateListPengirimanBesarComponent
   ],
   imports: [
 

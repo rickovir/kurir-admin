@@ -14,26 +14,53 @@ export class KurirComponent implements OnInit {
   }
 
   ngOnInit() {
-  	this.kurirService.getAllKurir().subscribe(
-  		kurir=>{
-  			this.kurirData = kurir;
-  			console.log(this.kurirData);
-  		});
+    this.kurirService.initData();
+    this.kurirService.showKurir().subscribe(
+      (data:Kurir[])=>{
+        this.kurirData = data;
+        console.log(data);
+    });
+    // kurir stream
+    this.kurirService.kurirStream().subscribe(
+      (data)=>{ 
+        console.log(data);
+        if(data.type == "add")
+        {
+          data.data.IDKurir = data.IDKurir;
+          this.kurirData.unshift(data.data);
+        }
+        else if(data.type=="update")
+        {
+          for(let i =0; i<this.kurirData.length; i++)
+          {
+            if(this.kurirData[i].IDKurir == data.IDKurir)
+            {
+              this.kurirData[i] = data.data;
+              this.kurirData[i].IDKurir = data.IDKurir;
+            }
+          }
+        }
+        else if(data.type == "delete")
+        {
+          this.kurirData = this.kurirData.filter(kurir=>kurir.IDKurir !==data.IDKurir);
+        }
+      });
+
   }
 
-  deleteKurir(id)
+  kurirJenisChange(name)
   {
-  	this.kurirService.deleteKurir(id).subscribe(
-  		(data)=>{
-  			console.log(data);
-  		});
+    if(name == "MTR")
+      return "Motor";
+    else if(name == "BSR")
+      return "Besar";
   }
-  restoreKurir(id)
+
+  doDeleteKurir(id)
   {
-  	this.kurirService.restoreKurir(id).subscribe(
-  		(data)=>{
-  			console.log(data);
-  		});
+    this.kurirService.deleteKurir(id).subscribe((data)=>{
+      console.log(data);
+    });
   }
 
 }

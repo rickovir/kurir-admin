@@ -1,0 +1,70 @@
+<h4>Tambah Pengiriman Kurir Besar</h4>
+<div class="card">
+	<div class="header">
+		<a class="btn btn-primary pull-right" href="/list-pengiriman-besar">Back</a>
+	</div>
+	<div class="content">
+		<!-- <form> -->
+			<div class="row">
+			    <div class="col-md-6">
+			        <div class="form-group">
+			            <label>Pilih Kurir</label>
+				        <select class="form-control border-input" [(ngModel)]="IDKurir">
+				      		<option *ngFor="let kurir of kurirs" [ngValue]="kurir.IDKurir">{{kurir.IDKurir}} - {{ kurir.nama_kurir }}</option>
+				      	</select>
+			        </div>
+			    </div>
+			</div>
+			<div class="row">
+			    <div class="col-md-6">
+			        <div class="form-group">
+			            <label>Pilih Cabang Tujuan</label>
+				        <select class="form-control border-input" [(ngModel)]="IDCabang" (change)="showPaketFormCabang()">
+				      		<option *ngFor="let cabang of cabangs" [ngValue]="cabang.IDCabang">{{cabang.IDCabang}} - {{ cabang.nama_cabang }}</option>
+				      	</select>
+			        </div>
+			    </div>
+			</div>
+		<!-- </form> -->
+		<!-- <button class="btn btn-primary btn-fill" (click)="submitData()" type="submit">Submit Kurir</button> -->
+	</div>
+</div>
+<div class="card">
+	<div class="header">
+	    <h4 class="title">Detail Pengiriman Kurir</h4>
+	</div>
+	<div class="content">
+		<!-- <form> -->
+			<div class="row">
+			    <div class="col-md-6">
+			    	<h5>Paket Tersedia</h5>
+			        <div class="list-group">
+						<button *ngFor="let paket of paketsOP" (click)="addToList(paket)" type="button" class="list-group-item">
+						  {{paket.IDPaket}} - 
+						  {{paket.nama_paket}}
+						</button>
+					</div>
+			    </div>
+			    <div class="col-md-6">
+			    	<h5>Paket Akan Dikirim</h5>
+			        <div class="list-group">
+					  <button *ngFor="let detail of detailPengiriman" type="button" class="list-group-item">
+					  	{{detail.IDPaket}}
+					  	-
+					  	{{getNamaPaket(detail.IDPaket)}}
+					  	<!-- button dismiss -->
+					  	<button type="button" (click)="removeFromList(detail)" class="close" data-dismiss="alert" aria-label="Close">
+						  <span aria-hidden="true">&times;</span>
+						</button>
+					  </button>
+					</div>
+			    </div>
+			</div>
+		<!-- </form> -->
+		<button class="btn btn-danger btn-fill" (click)="submitData()" type="submit">Submit Data</button>
+	</div>
+</div>
+<div class="alert alert-success" *ngIf="isSubmit">
+    <button type="button" aria-hidden="true" class="close">×</button>
+    <span><b> Success - </b> Data Berhasil disimpan</span>
+</div>

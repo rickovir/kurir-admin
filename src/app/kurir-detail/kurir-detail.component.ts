@@ -21,17 +21,17 @@ export class KurirDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-  	this.route.params.subscribe(
-  		param =>{
-  			console.log(param['id']);
-  			this.kurirService.getKurir(param['id']).subscribe(
-  				data=>{
-  					this.kurir = data;
-  					console.log(data);
-  				}
-  			);
-  		}
-	);
+ //  	this.route.params.subscribe(
+ //  		param =>{
+ //  			console.log(param['id']);
+ //  			this.kurirService.getKurir(param['id']).subscribe(
+ //  				data=>{
+ //  					this.kurir = data;
+ //  					console.log(data);
+ //  				}
+ //  			);
+ //  		}
+	// );
   }
 
 }

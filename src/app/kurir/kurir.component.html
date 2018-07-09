@@ -1,47 +1,33 @@
 <h4>Kurir</h4>
 <div class="card">
   <div class="header">
-    <a href="paket/add" class="btn btn-success pull-right" >Add Kurir</a> 
+    <a href="kurir/add" class="btn btn-success pull-right" >Add Kurir</a> 
     <h4 class="title">Kurir</h4>
     <p class="category">List Data Kurir</p>
   </div>
-  <style type="text/css">
-  input[type="search"] {
-    border: 1px solid #66615b !important;
-  }
-</style>
 <div class="content table-responsive">
   <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">No</th>
-        <th scope="col">Id kurir</th>
-        <th scope="col">Nama kurir</th>
-        <th scope="col">No Hp</th>
-        <th scope="col">Alamat</th>
+        <th scope="col" width="10%">ID</th>
+        <th scope="col" width="35%">Nama kurir</th>
+        <th scope="col" width="20%">Telepon</th>
+        <th scope="col" width="15%">Jenis Kurir</th>
+        <th scope="col" width="20%">Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let kurir of kurirData">
-        <th scope="row">{{kurir.id_kurir}}</th>
-        <td>{{kurir.nama_kurir}}</td>
-        <td>{{kurir.nohp}}</td>
-        <td>{{kurir.alamat}}</td>
+        <td>{{kurir.IDKurir}}</td>
+        <td>{{ kurir.nama_kurir}}</td>
+        <td>{{ kurir.telepon }}</td>
+        <td>{{ kurirJenisChange(kurir.jenis) }}</td>
         <td>
-         <div class="custom-control custom-checkbox" (click)="restoreKurir(kurir.id_kurir)" *ngIf="kurir.trash == 'Y'">
-          <input type="checkbox" class="custom-control-input" id="trash-check{{kurir.id_kurir}}" checked>
-          <label class="custom-control-label" for="trash-check{{kurir.id_kurir}}">Y</label>
-        </div>
-        <div class="custom-control custom-checkbox" (click)="deleteKurir(kurir.id_kurir)" *ngIf="kurir.trash == 'N'">
-          <input type="checkbox" class="custom-control-input" id="trash-check{{kurir.id_kurir}}">
-          <label class="custom-control-label" for="trash-check{{kurir.id_kurir}}">Y</label>
-        </div>
-      </td>
-      <td>
-        <button class="btn btn-primary" [routerLink]="['/kurir', kurir.id_kurir]">Edit</button>
-      </td>
-    </tr>
-  </tbody>
+          <a href="kurir/update/{{ kurir.IDKurir }}" class="btn btn-success btn-fill"><i class="ti-pencil"></i></a>
+          <button (click)="doDeleteKurir(kurir.IDKurir)" class="btn btn-danger btn-fill"><i class="ti-trash"></i></button>
+        </td>
+      </tr>
+    </tbody>
 </table>
 
 </div>

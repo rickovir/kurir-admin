@@ -1,14 +1,19 @@
 export class Kurir{
-	id_paket:string;
-	nama_pengirim:string;
-	tujuan:string;
-	nama_penerima:string;
-	kategori:string;
-	expired:string;
-	image:string;
-	nama_link:string;
-	status:string;
-	trash:string;
-	waktu_mulai:string;
-	waktu_berakhir:string;
+	IDKurir:number;
+	nama_kurir:string;
+	telepon:string;
+	alamat:string;
+	jenis:string;
+	password:string;
+	created_on:number;
+
+	constructor(){
+		this.IDKurir=0;
+		this.nama_kurir="";
+		this.telepon="";
+		this.alamat="";
+		this.jenis="";
+		this.password="";
+		this.created_on=0;	
+	}
 }

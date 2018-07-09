@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+
+import * as io from 'socket.io-client';
 
 import {Kurir} from "./kurir";
 
@@ -9,56 +10,125 @@ import {Kurir} from "./kurir";
   providedIn: 'root'
 })
 export class KurirService {
-  constructor( private http:HttpClient) { }
-
-  public getAllKurir():Observable<Kurir[]>
+    private socketUrl:string;
+    private socket:any;
+  constructor() {
+    this.socketUrl = "http://localhost:3000";
+    this.socket = io(this.socketUrl);
+    this.socket.connect();  
+  }
+  public initData()
   {
-    let httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    this.socket.on('connect',()=>{
+      this.socket.emit('show_kurir');
+    })
+  }
+    // show_paket_barang
+  public showKurir()
+  {
+    let observable:Observable<Kurir[]> = new Observable(
+        (observer) => {
+        this.socket.on('show_kurir_messages', 
+          (data) => {
+          observer.next(data);
+          });
+        })
+      return observable;
+  }
+  public kurirStream()
+  {
+    let observable:Observable<any> = new Observable(
+        (observer) => {
+        this.socket.on('kurir_stream', 
+          (data) => {
+          observer.next(data);
+          });
+        })
+      return observable;
+  }
+
+  public addKurir(data, dataPenempatan):Observable<any>
+  {
+    let send = {
+      type : 'add',
+      data : data,
+      cabang : {
+        IDCabang : localStorage.getItem("IDCabang"),
+        nama_cabang : localStorage.getItem("nama_cabang")
+      },
+      dataPenempatan
     };
-    return this.http.get<Kurir[]>('http://localhost/cencal/api/getkurir/',httpOptions)
-    .pipe(
-      tap(kurir => console.log(`fetched ${kurir}`)),
-      catchError(this.handleError('getHeroes', []))
-    );
+    console.log(send);
+    this.socket.emit('kurir_stream', send);
+    
+      let observable:Observable<any> = new Observable(
+        (observer) => {
+        this.socket.on('kurir_stream', 
+          (data) => {
+            observer.next(data);
+          });
+        })
+      return observable;
   }
-  
-  public getKurir(id)
+  public updateKurir(data, dataPenempatan):Observable<any>
   {
-  	let httpOptions = {
-	  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-	  };
-  	return this.http.get('http://localhost/cencal/api/getkurir/'+id,httpOptions);
-  }
-
-  public deleteKurir(id_kurir:string)
-  {
-  	let httpOptions = {
-	  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-	};
-	let postData = {id_kurir:id_kurir};
-  	return this.http.post('http://localhost/cencal/api/deletekurir/',JSON.stringify(postData) ,httpOptions);
-  }
-  public restoreKurir(id_kurir:string)
-  {
-  	let httpOptions = {
-	  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-	};
-	let postData = {id_kurir:id_kurir};
-  	return this.http.post('http://localhost/cencal/api/restorekurir/',JSON.stringify(postData) ,httpOptions);
-  }
-
-  private handleError<T> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
- 
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
- 
-      // TODO: better job of transforming error for user consumption
-      console.log(`${operation} failed: ${error.message}`);
- 
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
+    let send = {
+      type : 'update',
+      data : data,
+      IDKurir : data.IDKurir,
+      cabang : {
+        IDCabang : localStorage.getItem("IDCabang"),
+        nama_cabang : localStorage.getItem("nama_cabang")
+      },
+      dataPenempatan
     };
+    this.socket.emit('kurir_stream', send);
+    
+    console.log(send);
+
+      let observable:Observable<any> = new Observable(
+        (observer) => {
+        this.socket.on('kurir_stream', 
+          (data) => {
+            observer.next(data);
+          });
+        })
+      return observable;
+  }
+
+  public deleteKurir(id):Observable<any>
+  {
+    let send = {
+      type : 'delete',
+      IDKurir : id
+    };
+    this.socket.emit('kurir_stream', send);
+    
+    console.log(send);
+
+      let observable:Observable<any> = new Observable(
+        (observer) => {
+        this.socket.on('kurir_stream', 
+          (data) => {
+            observer.next(data);
+          });
+        })
+      return observable;
+  }
+  public callSelectKurir(id)
+  {
+    this.socket.emit("select_kurir",{IDKurir:id});
+  }
+
+  public receiveSelectKurir()
+  {
+    let observable:Observable<any> = new Observable(
+        (observer) => {
+        this.socket.on('select_kurir_messages', 
+          (data) => {
+          observer.next(data);
+          });
+        })
+      return observable;
   }
 }
