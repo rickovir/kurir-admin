@@ -1,0 +1,35 @@
+<h4>Kurir Motor</h4>
+<div class="card">
+  <div class="header">
+    <h4 class="title">Kurir</h4>
+    <p class="category">List Data Pengiriman Kurir Motor</p>
+  </div>
+<div class="content table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col" width="10%">ID</th>
+        <th scope="col" width="35%">Nama kurir</th>
+        <th scope="col" width="15%">Status</th>
+        <th scope="col" width="20%">Jumlah Pengiriman</th>
+        <th scope="col" width="20%">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of dataKurirMotor">
+        <td>{{ data.IDKurir }}</td>
+        <td>{{ data.nama_kurir }}</td>
+        <td>
+        	<button *ngIf="data.isActive=='Y'" class="btn btn-success">Online</button>
+        	<button *ngIf="data.isActive=='N'" class="btn btn-warning">Offline</button>
+        </td>
+        <td>{{ cekJumlahKirim(data.IDKurir) }}</td>
+        <td>
+          <a href="list-pengiriman/update/{{ data.IDKurir }}" class="btn btn-danger btn-fill"><i class="ti-new-window"></i></a>
+        </td>
+      </tr>
+    </tbody>
+</table>
+
+</div>
+</div>

@@ -113,7 +113,8 @@ export class UpdateListPengirimanBesarComponent implements OnInit {
   		IDKurir : this.IDKurir,
   		IDListPengirimanBesar :0,
   		isSend:"N",
-  		created_on :0
+  		created_on :0,
+      isCancel:"N"
   	};
   	this.listPengirimanBesarService.addList(list, this.detailPengiriman).subscribe(
   		(data)=>{

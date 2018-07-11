@@ -22,6 +22,9 @@ import { UpdateKurirComponent } from './update-kurir/update-kurir.component';
 import { ListPengirimanBesarComponent } from './list-pengiriman-besar/list-pengiriman-besar.component';
 import { AddListPengirimanBesarComponent } from './add-list-pengiriman-besar/add-list-pengiriman-besar.component';
 import { UpdateListPengirimanBesarComponent } from './update-list-pengiriman-besar/update-list-pengiriman-besar.component';
+import { ListPengirimanComponent } from './list-pengiriman/list-pengiriman.component';
+import { AddListPengirimanComponent } from './add-list-pengiriman/add-list-pengiriman.component';
+import { UpdateListPengirimanComponent } from './update-list-pengiriman/update-list-pengiriman.component';
 
 const adminRoute:Routes =[
  {
@@ -47,6 +50,14 @@ const adminRoute:Routes =[
   {
    path:'list-pengiriman-besar',
    component:ListPengirimanBesarComponent
+ },
+  {
+   path:'list-pengiriman-motor',
+   component:ListPengirimanComponent
+ },
+ {
+    path:"list-pengiriman/update/:id",
+    component:UpdateListPengirimanComponent
  },
  {
     path:"list-pengiriman-besar/update/:id",
@@ -96,7 +107,10 @@ const appRoute: Routes = [
     UpdateKurirComponent,
     ListPengirimanBesarComponent,
     AddListPengirimanBesarComponent,
-    UpdateListPengirimanBesarComponent
+    UpdateListPengirimanBesarComponent,
+    ListPengirimanComponent,
+    AddListPengirimanComponent,
+    UpdateListPengirimanComponent
   ],
   imports: [
 
