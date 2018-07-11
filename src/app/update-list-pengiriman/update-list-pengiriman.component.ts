@@ -60,6 +60,7 @@ export class UpdateListPengirimanComponent implements OnInit {
   	this.listPengirimanService.receiveKurirList().subscribe(
   		(data:any[])=>{
   		this.listPengirimanInit = data;
+      this.listPengirimanInit = this.listPengirimanInit.filter(data=>data.status_pengiriman != "SUKSES");
   		console.log(data);
   	});
   	this.listPengirimanService.showPaketBarang().subscribe(
@@ -95,7 +96,8 @@ export class UpdateListPengirimanComponent implements OnInit {
   		IDKurir:this.IDKurir,
   		prioritas:prioritas,
   		kategori_paket:data.kategori_paket,
-  		IDCabang:parseInt(localStorage.getItem('IDCabang'))
+  		IDCabang:parseInt(localStorage.getItem('IDCabang')),
+      status_pengiriman:"PENDING"
   	};
   	this.listPengiriman.push(dataDetail);
   	this.paketsOP = this.paketsOP.filter(paket=>paket.IDPaket !== data.IDPaket);

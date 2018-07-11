@@ -172,5 +172,15 @@ export class ListPengirimanService {
         })
       return observable;
   }
-
+  public statusStream()
+  {
+    let observable:Observable<any> = new Observable(
+        (observer) => {
+        this.socket.on('kurir_status', 
+          (data) => {
+          observer.next(data);
+          });
+        })
+      return observable;
+  }
 }

@@ -1,7 +1,7 @@
 <h4>Pengiriman Kurir Motor</h4>
 <div class="card">
 	<div class="header">
-		<a class="btn btn-primary pull-right" href="/list-pengiriman-besar">Back</a>
+		<a class="btn btn-primary pull-right" href="/list-pengiriman-motor">Back</a>
 	</div>
 	<div class="content">
 		<!-- <form> -->
@@ -48,6 +48,8 @@
 					  	-
 					  	{{listInit.nama_paket}} <br>
 					  	{{listInit.alamat_penerima}}
+					  	<button *ngIf="listInit.status_pengiriman == 'PENDING' " class="btn btn-default">PENDING</button>
+					  	<button *ngIf="listInit.status_pengiriman == 'GAGAL' " class="btn btn-danger btn-fill">GAGAL</button>
 					  	<!-- button dismiss -->
 					  	<button type="button" (click)="deleteList(listInit)" class="close" data-dismiss="alert" aria-label="Close">
 						  <span aria-hidden="true">&times;</span>

@@ -20,7 +20,7 @@
         <td>{{ data.IDKurir }}</td>
         <td>{{ data.nama_kurir }}</td>
         <td>
-        	<button *ngIf="data.isActive=='Y'" class="btn btn-success">Online</button>
+        	<button *ngIf="data.isActive=='Y'" class="btn btn-success btn-fill">Online</button>
         	<button *ngIf="data.isActive=='N'" class="btn btn-warning">Offline</button>
         </td>
         <td>{{ cekJumlahKirim(data.IDKurir) }}</td>

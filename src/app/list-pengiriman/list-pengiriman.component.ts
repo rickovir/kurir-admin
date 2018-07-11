@@ -21,6 +21,20 @@ export class ListPengirimanComponent implements OnInit {
   			console.log(data);
   			this.listKirim = data;
   		})
+
+    this.listPengirimanService.statusStream().subscribe(
+      (data)=>{
+        console.log("online ");
+        console.log(data);
+        
+          for(let i =0; i<this.dataKurirMotor.length; i++)
+          {
+            if(this.dataKurirMotor[i].IDKurir == data.data.IDKurir)
+            {
+              this.dataKurirMotor[i].isActive = data.data.isActive;
+            }
+          }
+      });
   }
 
   initData()
